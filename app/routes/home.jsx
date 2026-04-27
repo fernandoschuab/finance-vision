@@ -33,9 +33,15 @@ export default function Home() {
     }
   }, [transacoes]);
 
+  function gerarId() {
+    return typeof crypto !== "undefined" && crypto.randomUUID
+      ? crypto.randomUUID()
+      : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  }
+
   function handleAdd({ descricao, valor, tipo, categoria }) {
     const nova = {
-      id: crypto.randomUUID(),
+      id: gerarId(),
       descricao,
       valor,
       tipo,
